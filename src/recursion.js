@@ -42,15 +42,17 @@ var arraySum = function(array) {
     return 0;
   }
 
-  // base case: one element in array
+  // base case: one element in array, is not an array
   if (array.length === 1 && (!Array.isArray(array[0]))) {
     return array[0];
   }
 
+  // if the first item is an array, sum subarray up then continue w/ array
   if (Array.isArray(array[0])) {
-    return arraySum(array[0]);
+    return arraySum(array[0]) + arraySum(array.slice(1));
   }
-  
+
+  // if the first item is not an array, sum it up then continue w/ array
   return array[0] + arraySum(array.slice(1));
 }
 
