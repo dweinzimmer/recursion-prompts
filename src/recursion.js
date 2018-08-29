@@ -126,11 +126,20 @@ var exponent = function(base, exp) {
   }
 
   if (exp > 1) {
-    return (base * exponent(base, exp - 1)).toFixed(5)*1;
+    if (exp % 2 === 0) {  // if even
+      return exponent(base * base, (exp / 2)).toFixed(5)*1;
+    } else {              // if odd
+      return base * exponent(base * base, ((exp - 1) / 2));
+    }
   }
 
   if (exp < -1) {
-    return ((1 / base) * exponent(base, exp + 1)).toFixed(5)*1;
+    if (exp % 2 === 0) {  // if even
+      return exponent((1 / base) * (1 / base), ((-exp) / 2));
+    } else {
+      return (1 / base) * exponent((1 / base) * (1 / base), (((-exp) - 1) / 2));
+    }
+    // return ((1 / base) * exponent(base, exp + 1)).toFixed(5)*1;
   }
 
 };
