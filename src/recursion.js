@@ -155,7 +155,7 @@ var powerOfTwo = function(n) {
   if (n === 1) {
     return true;
   }
-  if (n.toFixed(4) - Math.floor(n) !== 0) {
+  if (!Number.isInteger(n)) {
     return false;
   }
 
