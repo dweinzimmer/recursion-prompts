@@ -170,12 +170,36 @@ var reverse = function(string) {
     return '';
   }
 
-  return reverse(string.substr(1)) + string.charAt(0);
+  return reverse(string.substring(1)) + string.charAt(0);
 
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  // initialize only the first time
+  if (i === undefined || j === undefined) {
+    var i = 0;
+    var j = string.length - 1;
+  }
+
+  // ignore spaces
+  if (string[i] === ' ') { i++; }
+  if (string[j] === ' ') { j--; }
+
+  // base cases
+  if (i === j) {
+    return true;
+  }
+  if (i === j - 1) {
+    return string[i].toLowerCase() === string[j].toLowerCase();
+  }
+
+  //recursive case
+  if (string[i].toLowerCase() === string[j].toLowerCase()) {
+    return palindrome(string.substring(i + 1, j));
+  } else {
+    return false;
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
