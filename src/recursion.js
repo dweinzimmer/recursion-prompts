@@ -207,7 +207,39 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+// Tests do not allow comments within this function because they think slashes are division operators
+// Lines 213-220: rules; Lines 222-237: base cases; Lines 239-242: recursive cases
 var modulo = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  }
+  if (x === 0) {
+    return 0;
+  }
+
+  if (y < 0) { y = -y; }
+
+  if (x > 0) {
+    if (x - y === 0) {
+      return 0;
+    }
+    if (x - y < 0) {
+      return x;
+    }
+  }
+  if (x < 0) {
+    if (x + y === 0) {
+      return 0;
+    }
+    if (x + y > 0) {
+      return x;
+    }
+  }
+
+  if (x < 0) {
+    return modulo(x + y, y);
+  }
+  return modulo(x - y, y);
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
