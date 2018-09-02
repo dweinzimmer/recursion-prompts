@@ -674,22 +674,26 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
-  // the first time, make sure first item is positive
-  if (arguments.length === 1) {
-    return [Math.abs(array[0])].concat(alternateSign(array.slice(1), -1));
+  // base case: if no pairs left, return nothing
+  if (array.length === 0) {
+    return array;
   }
+
+  // processing
+  if (array[0] < 0) {
+    array[0] *= -1;
+  }
+  if (array[1] > 0) {
+    array[1] *= -1;
+  }
+
   // base case
   if (array.length === 1) {
-    return [Math.abs(array[0]) * arguments[1]];
+    return [array[0]];
   }
-
   // recursive case
-  return [Math.abs(array[0]) * arguments[1]].concat(alternateSign(array.slice(1), arguments[1] * -1));
-
-
-  // recursive: process the last and prepend recursing the prior
-  return alternateSign(array.slice(0, -1)).concat(array[array.length - 1] * -1);
-};
+  return [array[0], array[1]].concat(alternateSign(array.slice(2)))
+}
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
