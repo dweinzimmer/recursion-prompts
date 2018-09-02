@@ -699,6 +699,34 @@ var alternateSign = function(array) {
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 var numToText = function(str) {
+  var lookup = {
+    '1': 'one',
+    '2': 'two',
+    '3': 'three',
+    '4': 'four',
+    '5': 'five',
+    '6': 'six',
+    '7': 'seven',
+    '8': 'eight',
+    '9': 'nine'
+  }
+
+  // base case
+  if (str.length === 1) {
+    // if the character is a string
+    if (str[0] === ' ' || isNaN(str[0] * 1)) {
+      return str[0];
+    } else {
+      return lookup[str[0]];
+    }
+  }
+
+  // recursive case
+  if (str[0] === ' ' || isNaN(str[0] * 1)) {
+    return str[0] + numToText(str.slice(1));
+  } else {
+    return lookup[str[0]] + numToText(str.slice(1));
+  }
 };
 
 
